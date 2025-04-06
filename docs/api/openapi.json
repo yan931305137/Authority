@@ -1,0 +1,1609 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "API Documentation",
+    "version" : "1.0"
+  },
+  "paths" : {
+    "/webauthn/v1/register/challenge/{username}" : {
+      "get" : {
+        "summary" : "处理注册挑战请求。",
+        "description" : "处理注册挑战请求。",
+        "parameters" : [ {
+          "name" : "username",
+          "in" : "path",
+          "description" : "用户名",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "PublicKeyCredentialCreationOptions对象",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "rp" : {
+                      "type" : "object",
+                      "properties" : {
+                        "name" : {
+                          "type" : "string",
+                          "description" : ""
+                        },
+                        "id" : {
+                          "type" : "string",
+                          "description" : ""
+                        }
+                      },
+                      "description" : ""
+                    },
+                    "user" : {
+                      "type" : "object",
+                      "properties" : {
+                        "name" : {
+                          "type" : "string",
+                          "description" : ""
+                        },
+                        "id" : {
+                          "type" : "array",
+                          "description" : "",
+                          "items" : {
+                            "type" : "integer"
+                          }
+                        },
+                        "displayName" : {
+                          "type" : "string",
+                          "description" : ""
+                        }
+                      },
+                      "description" : ""
+                    },
+                    "challenge" : {
+                      "type" : "object",
+                      "properties" : { },
+                      "description" : ""
+                    },
+                    "pubKeyCredParams" : {
+                      "type" : "array",
+                      "description" : "",
+                      "items" : {
+                        "type" : "object",
+                        "properties" : {
+                          "type" : {
+                            "type" : "object",
+                            "properties" : {
+                              "value" : {
+                                "type" : "string",
+                                "description" : ""
+                              }
+                            },
+                            "description" : ""
+                          },
+                          "alg" : {
+                            "type" : "object",
+                            "properties" : {
+                              "value" : {
+                                "type" : "integer",
+                                "description" : "",
+                                "format" : "int64"
+                              }
+                            },
+                            "description" : ""
+                          }
+                        },
+                        "description" : "com.webauthn4j.data.PublicKeyCredentialParameters"
+                      }
+                    },
+                    "timeout" : {
+                      "type" : "integer",
+                      "description" : "",
+                      "format" : "int64"
+                    },
+                    "excludeCredentials" : {
+                      "type" : "array",
+                      "description" : "",
+                      "items" : {
+                        "type" : "object",
+                        "properties" : {
+                          "type" : {
+                            "type" : "object",
+                            "properties" : {
+                              "value" : {
+                                "type" : "string",
+                                "description" : ""
+                              }
+                            },
+                            "description" : ""
+                          },
+                          "id" : {
+                            "type" : "array",
+                            "description" : "",
+                            "items" : {
+                              "type" : "integer"
+                            }
+                          },
+                          "transports" : {
+                            "type" : "array",
+                            "description" : "",
+                            "items" : {
+                              "type" : "object",
+                              "properties" : {
+                                "value" : {
+                                  "type" : "string",
+                                  "description" : ""
+                                }
+                              },
+                              "description" : "com.webauthn4j.data.AuthenticatorTransport"
+                            }
+                          }
+                        },
+                        "description" : "com.webauthn4j.data.PublicKeyCredentialDescriptor"
+                      }
+                    },
+                    "authenticatorSelection" : {
+                      "type" : "object",
+                      "properties" : {
+                        "authenticatorAttachment" : {
+                          "type" : "object",
+                          "properties" : {
+                            "value" : {
+                              "type" : "string",
+                              "description" : ""
+                            }
+                          },
+                          "description" : ""
+                        },
+                        "requireResidentKey" : {
+                          "type" : "boolean",
+                          "description" : ""
+                        },
+                        "residentKey" : {
+                          "type" : "object",
+                          "properties" : {
+                            "value" : {
+                              "type" : "string",
+                              "description" : ""
+                            }
+                          },
+                          "description" : ""
+                        },
+                        "userVerification" : {
+                          "type" : "object",
+                          "properties" : {
+                            "value" : {
+                              "type" : "string",
+                              "description" : ""
+                            }
+                          },
+                          "description" : ""
+                        }
+                      },
+                      "description" : ""
+                    },
+                    "attestation" : {
+                      "type" : "object",
+                      "properties" : {
+                        "value" : {
+                          "type" : "string",
+                          "description" : ""
+                        }
+                      },
+                      "description" : ""
+                    },
+                    "extensions" : {
+                      "type" : "object",
+                      "properties" : {
+                        "appid" : {
+                          "type" : "string",
+                          "description" : ""
+                        },
+                        "appidExclude" : {
+                          "type" : "string",
+                          "description" : ""
+                        },
+                        "uvm" : {
+                          "type" : "boolean",
+                          "description" : ""
+                        },
+                        "credProps" : {
+                          "type" : "boolean",
+                          "description" : ""
+                        },
+                        "credentialProtectionPolicy" : {
+                          "type" : "string",
+                          "description" : "{USER_VERIFICATION_OPTIONAL=USER_VERIFICATION_OPTIONAL, USER_VERIFICATION_OPTIONAL_WITH_CREDENTIAL_ID_LIST=USER_VERIFICATION_OPTIONAL_WITH_CREDENTIAL_ID_LIST, USER_VERIFICATION_REQUIRED=USER_VERIFICATION_REQUIRED}",
+                          "enum" : [ "USER_VERIFICATION_OPTIONAL", "USER_VERIFICATION_OPTIONAL_WITH_CREDENTIAL_ID_LIST", "USER_VERIFICATION_REQUIRED" ]
+                        },
+                        "enforceCredentialProtectionPolicy" : {
+                          "type" : "boolean",
+                          "description" : ""
+                        },
+                        "hmacCreateSecret" : {
+                          "type" : "boolean",
+                          "description" : ""
+                        },
+                        "hmacGetSecret" : {
+                          "type" : "object",
+                          "properties" : {
+                            "salt1" : {
+                              "type" : "array",
+                              "description" : "",
+                              "items" : {
+                                "type" : "integer"
+                              }
+                            },
+                            "salt2" : {
+                              "type" : "array",
+                              "description" : "",
+                              "items" : {
+                                "type" : "integer"
+                              }
+                            }
+                          },
+                          "description" : ""
+                        }
+                      },
+                      "description" : ""
+                    }
+                  },
+                  "description" : "PublicKeyCredentialCreationOptions对象"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/webauthn/v1/register/credential" : {
+      "post" : {
+        "summary" : "处理注册凭据请求。",
+        "description" : "处理注册凭据请求。",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "id" : {
+                    "type" : "string",
+                    "description" : ""
+                  },
+                  "rawId" : {
+                    "type" : "string",
+                    "description" : ""
+                  },
+                  "response" : {
+                    "type" : "object",
+                    "properties" : {
+                      "attestationObject" : {
+                        "type" : "string",
+                        "description" : ""
+                      },
+                      "clientDataJSON" : {
+                        "type" : "string",
+                        "description" : ""
+                      }
+                    },
+                    "description" : ""
+                  },
+                  "type" : {
+                    "type" : "string",
+                    "description" : ""
+                  }
+                },
+                "description" : "CredentialRequest对象"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Map对象",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "credentialId" : {
+                      "type" : "string"
+                    }
+                  },
+                  "description" : "Map对象"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/webauthn/v1/login/challenge/{username}" : {
+      "get" : {
+        "summary" : "处理登录挑战请求。",
+        "description" : "处理登录挑战请求。",
+        "parameters" : [ {
+          "name" : "username",
+          "in" : "path",
+          "description" : "用户名",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "PublicKeyCredentialRequestOptions对象",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "challenge" : {
+                      "type" : "object",
+                      "properties" : { },
+                      "description" : ""
+                    },
+                    "timeout" : {
+                      "type" : "integer",
+                      "description" : "",
+                      "format" : "int64"
+                    },
+                    "rpId" : {
+                      "type" : "string",
+                      "description" : ""
+                    },
+                    "allowCredentials" : {
+                      "type" : "array",
+                      "description" : "",
+                      "items" : {
+                        "type" : "object",
+                        "properties" : {
+                          "type" : {
+                            "type" : "object",
+                            "properties" : {
+                              "value" : {
+                                "type" : "string",
+                                "description" : ""
+                              }
+                            },
+                            "description" : ""
+                          },
+                          "id" : {
+                            "type" : "array",
+                            "description" : "",
+                            "items" : {
+                              "type" : "integer"
+                            }
+                          },
+                          "transports" : {
+                            "type" : "array",
+                            "description" : "",
+                            "items" : {
+                              "type" : "object",
+                              "properties" : {
+                                "value" : {
+                                  "type" : "string",
+                                  "description" : ""
+                                }
+                              },
+                              "description" : "com.webauthn4j.data.AuthenticatorTransport"
+                            }
+                          }
+                        },
+                        "description" : "com.webauthn4j.data.PublicKeyCredentialDescriptor"
+                      }
+                    },
+                    "userVerification" : {
+                      "type" : "object",
+                      "properties" : {
+                        "value" : {
+                          "type" : "string",
+                          "description" : ""
+                        }
+                      },
+                      "description" : ""
+                    },
+                    "extensions" : {
+                      "type" : "object",
+                      "properties" : {
+                        "appid" : {
+                          "type" : "string",
+                          "description" : ""
+                        },
+                        "appidExclude" : {
+                          "type" : "string",
+                          "description" : ""
+                        },
+                        "uvm" : {
+                          "type" : "boolean",
+                          "description" : ""
+                        },
+                        "credProps" : {
+                          "type" : "boolean",
+                          "description" : ""
+                        },
+                        "credentialProtectionPolicy" : {
+                          "type" : "string",
+                          "description" : "{USER_VERIFICATION_OPTIONAL=USER_VERIFICATION_OPTIONAL, USER_VERIFICATION_OPTIONAL_WITH_CREDENTIAL_ID_LIST=USER_VERIFICATION_OPTIONAL_WITH_CREDENTIAL_ID_LIST, USER_VERIFICATION_REQUIRED=USER_VERIFICATION_REQUIRED}",
+                          "enum" : [ "USER_VERIFICATION_OPTIONAL", "USER_VERIFICATION_OPTIONAL_WITH_CREDENTIAL_ID_LIST", "USER_VERIFICATION_REQUIRED" ]
+                        },
+                        "enforceCredentialProtectionPolicy" : {
+                          "type" : "boolean",
+                          "description" : ""
+                        },
+                        "hmacCreateSecret" : {
+                          "type" : "boolean",
+                          "description" : ""
+                        },
+                        "hmacGetSecret" : {
+                          "type" : "object",
+                          "properties" : {
+                            "salt1" : {
+                              "type" : "array",
+                              "description" : "",
+                              "items" : {
+                                "type" : "integer"
+                              }
+                            },
+                            "salt2" : {
+                              "type" : "array",
+                              "description" : "",
+                              "items" : {
+                                "type" : "integer"
+                              }
+                            }
+                          },
+                          "description" : ""
+                        }
+                      },
+                      "description" : ""
+                    }
+                  },
+                  "description" : "PublicKeyCredentialRequestOptions对象"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/webauthn/v1/login/challenge/" : {
+      "get" : {
+        "summary" : "处理匿名登录挑战请求。",
+        "description" : "处理匿名登录挑战请求。",
+        "responses" : {
+          "200" : {
+            "description" : "PublicKeyCredentialRequestOptions对象",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "challenge" : {
+                      "type" : "object",
+                      "properties" : { },
+                      "description" : ""
+                    },
+                    "timeout" : {
+                      "type" : "integer",
+                      "description" : "",
+                      "format" : "int64"
+                    },
+                    "rpId" : {
+                      "type" : "string",
+                      "description" : ""
+                    },
+                    "allowCredentials" : {
+                      "type" : "array",
+                      "description" : "",
+                      "items" : {
+                        "type" : "object",
+                        "properties" : {
+                          "type" : {
+                            "type" : "object",
+                            "properties" : {
+                              "value" : {
+                                "type" : "string",
+                                "description" : ""
+                              }
+                            },
+                            "description" : ""
+                          },
+                          "id" : {
+                            "type" : "array",
+                            "description" : "",
+                            "items" : {
+                              "type" : "integer"
+                            }
+                          },
+                          "transports" : {
+                            "type" : "array",
+                            "description" : "",
+                            "items" : {
+                              "type" : "object",
+                              "properties" : {
+                                "value" : {
+                                  "type" : "string",
+                                  "description" : ""
+                                }
+                              },
+                              "description" : "com.webauthn4j.data.AuthenticatorTransport"
+                            }
+                          }
+                        },
+                        "description" : "com.webauthn4j.data.PublicKeyCredentialDescriptor"
+                      }
+                    },
+                    "userVerification" : {
+                      "type" : "object",
+                      "properties" : {
+                        "value" : {
+                          "type" : "string",
+                          "description" : ""
+                        }
+                      },
+                      "description" : ""
+                    },
+                    "extensions" : {
+                      "type" : "object",
+                      "properties" : {
+                        "appid" : {
+                          "type" : "string",
+                          "description" : ""
+                        },
+                        "appidExclude" : {
+                          "type" : "string",
+                          "description" : ""
+                        },
+                        "uvm" : {
+                          "type" : "boolean",
+                          "description" : ""
+                        },
+                        "credProps" : {
+                          "type" : "boolean",
+                          "description" : ""
+                        },
+                        "credentialProtectionPolicy" : {
+                          "type" : "string",
+                          "description" : "{USER_VERIFICATION_OPTIONAL=USER_VERIFICATION_OPTIONAL, USER_VERIFICATION_OPTIONAL_WITH_CREDENTIAL_ID_LIST=USER_VERIFICATION_OPTIONAL_WITH_CREDENTIAL_ID_LIST, USER_VERIFICATION_REQUIRED=USER_VERIFICATION_REQUIRED}",
+                          "enum" : [ "USER_VERIFICATION_OPTIONAL", "USER_VERIFICATION_OPTIONAL_WITH_CREDENTIAL_ID_LIST", "USER_VERIFICATION_REQUIRED" ]
+                        },
+                        "enforceCredentialProtectionPolicy" : {
+                          "type" : "boolean",
+                          "description" : ""
+                        },
+                        "hmacCreateSecret" : {
+                          "type" : "boolean",
+                          "description" : ""
+                        },
+                        "hmacGetSecret" : {
+                          "type" : "object",
+                          "properties" : {
+                            "salt1" : {
+                              "type" : "array",
+                              "description" : "",
+                              "items" : {
+                                "type" : "integer"
+                              }
+                            },
+                            "salt2" : {
+                              "type" : "array",
+                              "description" : "",
+                              "items" : {
+                                "type" : "integer"
+                              }
+                            }
+                          },
+                          "description" : ""
+                        }
+                      },
+                      "description" : ""
+                    }
+                  },
+                  "description" : "PublicKeyCredentialRequestOptions对象"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/webauthn/v1/login/credential" : {
+      "post" : {
+        "summary" : "处理登录凭据请求。",
+        "description" : "处理登录凭据请求。",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "id" : {
+                    "type" : "string",
+                    "description" : "请求的唯一标识符。"
+                  },
+                  "rawId" : {
+                    "type" : "string",
+                    "description" : "请求的原始标识符。"
+                  },
+                  "response" : {
+                    "type" : "object",
+                    "properties" : {
+                      "authenticatorData" : {
+                        "type" : "string",
+                        "description" : "认证器数据。"
+                      },
+                      "clientDataJSON" : {
+                        "type" : "string",
+                        "description" : "客户端数据JSON。"
+                      },
+                      "signature" : {
+                        "type" : "string",
+                        "description" : "签名数据。"
+                      },
+                      "userHandle" : {
+                        "type" : "string",
+                        "description" : "用户句柄。"
+                      }
+                    },
+                    "description" : "响应对象，包含身份验证结果。"
+                  },
+                  "type" : {
+                    "type" : "string",
+                    "description" : "请求的类型。"
+                  }
+                },
+                "description" : "AssertRequest对象"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Map对象",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "response" : {
+                      "type" : "object",
+                      "properties" : {
+                        "rpIdHash" : {
+                          "type" : "array",
+                          "description" : "",
+                          "items" : {
+                            "type" : "integer"
+                          }
+                        },
+                        "flags" : {
+                          "maximum" : 128,
+                          "minimum" : -127,
+                          "type" : "integer",
+                          "description" : ""
+                        },
+                        "signCount" : {
+                          "type" : "integer",
+                          "description" : "",
+                          "format" : "int64"
+                        },
+                        "attestedCredentialData" : {
+                          "type" : "object",
+                          "properties" : {
+                            "aaguid" : {
+                              "type" : "object",
+                              "properties" : {
+                                "value" : {
+                                  "type" : "object",
+                                  "properties" : {
+                                    "mostSigBits" : {
+                                      "type" : "integer",
+                                      "description" : "",
+                                      "format" : "int64"
+                                    },
+                                    "leastSigBits" : {
+                                      "type" : "integer",
+                                      "description" : "",
+                                      "format" : "int64"
+                                    },
+                                    "leastSignificantBits" : {
+                                      "type" : "integer",
+                                      "description" : "Returns the least significant 64 bits of this UUID's 128 bit value.",
+                                      "format" : "int64"
+                                    },
+                                    "mostSignificantBits" : {
+                                      "type" : "integer",
+                                      "description" : "Returns the most significant 64 bits of this UUID's 128 bit value.",
+                                      "format" : "int64"
+                                    }
+                                  },
+                                  "description" : ""
+                                },
+                                "bytes" : {
+                                  "type" : "array",
+                                  "items" : {
+                                    "type" : "integer"
+                                  }
+                                }
+                              },
+                              "description" : "~ Instance fields ================================================================================================"
+                            },
+                            "credentialId" : {
+                              "type" : "array",
+                              "description" : "",
+                              "items" : {
+                                "type" : "integer"
+                              }
+                            },
+                            "coseKey" : {
+                              "type" : "object",
+                              "properties" : {
+                                "keyType" : {
+                                  "type" : "string",
+                                  "description" : "{OKP=OKP, EC2=EC2, RSA=RSA, SYMMETRIC=SYMMETRIC, RESERVED=RESERVED}",
+                                  "enum" : [ "OKP", "EC2", "RSA", "SYMMETRIC", "RESERVED" ]
+                                },
+                                "keyId" : {
+                                  "type" : "array",
+                                  "items" : {
+                                    "type" : "integer"
+                                  }
+                                },
+                                "algorithm" : {
+                                  "type" : "object",
+                                  "properties" : {
+                                    "value" : {
+                                      "type" : "integer",
+                                      "description" : "",
+                                      "format" : "int64"
+                                    }
+                                  },
+                                  "description" : "com.webauthn4j.data.attestation.statement.COSEAlgorithmIdentifier"
+                                },
+                                "keyOps" : {
+                                  "type" : "array",
+                                  "items" : {
+                                    "type" : "string",
+                                    "description" : "{SIGN=SIGN, VERIFY=VERIFY, ENCRYPT=ENCRYPT, DECRYPT=DECRYPT, WRAP_KEY=WRAP_KEY, UNWRAP_KEY=UNWRAP_KEY, DERIVE_KEY=DERIVE_KEY, DERIVE_BITS=DERIVE_BITS, MAC_CREATE=MAC_CREATE, MAC_VERIFY=MAC_VERIFY}",
+                                    "enum" : [ "SIGN", "VERIFY", "ENCRYPT", "DECRYPT", "WRAP_KEY", "UNWRAP_KEY", "DERIVE_KEY", "DERIVE_BITS", "MAC_CREATE", "MAC_VERIFY" ]
+                                  }
+                                },
+                                "baseIV" : {
+                                  "type" : "array",
+                                  "items" : {
+                                    "type" : "integer"
+                                  }
+                                }
+                              },
+                              "description" : ""
+                            },
+                            "cOSEKey" : {
+                              "type" : "object",
+                              "properties" : {
+                                "keyType" : {
+                                  "type" : "string",
+                                  "description" : "{OKP=OKP, EC2=EC2, RSA=RSA, SYMMETRIC=SYMMETRIC, RESERVED=RESERVED}",
+                                  "enum" : [ "OKP", "EC2", "RSA", "SYMMETRIC", "RESERVED" ]
+                                },
+                                "keyId" : {
+                                  "type" : "array",
+                                  "items" : {
+                                    "type" : "integer"
+                                  }
+                                },
+                                "algorithm" : {
+                                  "type" : "object",
+                                  "properties" : {
+                                    "value" : {
+                                      "type" : "integer",
+                                      "description" : "",
+                                      "format" : "int64"
+                                    }
+                                  },
+                                  "description" : "com.webauthn4j.data.attestation.statement.COSEAlgorithmIdentifier"
+                                },
+                                "keyOps" : {
+                                  "type" : "array",
+                                  "items" : {
+                                    "type" : "string",
+                                    "description" : "{SIGN=SIGN, VERIFY=VERIFY, ENCRYPT=ENCRYPT, DECRYPT=DECRYPT, WRAP_KEY=WRAP_KEY, UNWRAP_KEY=UNWRAP_KEY, DERIVE_KEY=DERIVE_KEY, DERIVE_BITS=DERIVE_BITS, MAC_CREATE=MAC_CREATE, MAC_VERIFY=MAC_VERIFY}",
+                                    "enum" : [ "SIGN", "VERIFY", "ENCRYPT", "DECRYPT", "WRAP_KEY", "UNWRAP_KEY", "DERIVE_KEY", "DERIVE_BITS", "MAC_CREATE", "MAC_VERIFY" ]
+                                  }
+                                },
+                                "baseIV" : {
+                                  "type" : "array",
+                                  "items" : {
+                                    "type" : "integer"
+                                  }
+                                }
+                              },
+                              "description" : "com.webauthn4j.data.attestation.authenticator.COSEKey"
+                            }
+                          },
+                          "description" : ""
+                        },
+                        "extensions" : {
+                          "type" : "object",
+                          "properties" : {
+                            "hMACSecret" : {
+                              "type" : "object",
+                              "properties" : { },
+                              "description" : "java.lang.Object"
+                            }
+                          },
+                          "description" : ""
+                        },
+                        "flagUP" : {
+                          "type" : "boolean"
+                        },
+                        "flagUV" : {
+                          "type" : "boolean"
+                        },
+                        "flagBE" : {
+                          "type" : "boolean"
+                        },
+                        "flagBS" : {
+                          "type" : "boolean"
+                        },
+                        "flagAT" : {
+                          "type" : "boolean"
+                        },
+                        "flagED" : {
+                          "type" : "boolean"
+                        }
+                      }
+                    }
+                  },
+                  "description" : "Map对象"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/webauthn/test" : {
+      "get" : {
+        "summary" : "首页",
+        "description" : "首页",
+        "responses" : {
+          "200" : {
+            "description" : "视图名称",
+            "content" : {
+              "text/html" : {
+                "schema" : {
+                  "type" : "string",
+                  "description" : "视图名称"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/totp/v1/register" : {
+      "post" : {
+        "summary" : "处理注册请求，生成并返回URI和QR码。",
+        "description" : "处理注册请求，生成并返回URI和QR码。",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "required" : [ "username" ],
+                "type" : "object",
+                "properties" : {
+                  "username" : {
+                    "type" : "string",
+                    "description" : "用户名"
+                  }
+                },
+                "description" : "注册请求对象"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "注册响应对象，包含URI和QR码",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "uri" : {
+                      "type" : "string",
+                      "description" : "URI"
+                    },
+                    "qr" : {
+                      "type" : "string",
+                      "description" : "QR码"
+                    }
+                  },
+                  "description" : "注册响应对象，包含URI和QR码"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/totp/v1/verify" : {
+      "post" : {
+        "summary" : "处理验证请求，验证TOTP是否有效。",
+        "description" : "处理验证请求，验证TOTP是否有效。",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "required" : [ "totp", "username" ],
+                "type" : "object",
+                "properties" : {
+                  "username" : {
+                    "type" : "string",
+                    "description" : "用户名"
+                  },
+                  "totp" : {
+                    "type" : "integer",
+                    "description" : "TOTP"
+                  }
+                },
+                "description" : "验证请求对象"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "验证响应对象，包含验证结果",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "valid" : {
+                      "type" : "boolean",
+                      "description" : "验证是否有效"
+                    }
+                  },
+                  "description" : "验证响应对象，包含验证结果"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/otp/v1/send" : {
+      "post" : {
+        "summary" : "发送OTP请求。",
+        "description" : "发送OTP请求。",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "required" : [ "destination", "sender" ],
+                "type" : "object",
+                "properties" : {
+                  "destination" : {
+                    "type" : "string",
+                    "description" : "目的地号码，不能为空"
+                  },
+                  "sender" : {
+                    "type" : "string",
+                    "description" : "发送者号码，不能为空"
+                  }
+                },
+                "description" : "发送OTP请求对象"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "发送OTP的结果",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "sessionId" : {
+                      "type" : "string",
+                      "description" : "会话ID"
+                    },
+                    "destination" : {
+                      "type" : "string",
+                      "description" : "目的地"
+                    },
+                    "resendAllowedAt" : {
+                      "type" : "integer",
+                      "description" : "允许重发时间",
+                      "format" : "int64"
+                    },
+                    "remainingAttempts" : {
+                      "type" : "integer",
+                      "description" : "剩余尝试次数"
+                    }
+                  },
+                  "description" : "发送OTP的结果"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/otp/v1/verify" : {
+      "post" : {
+        "summary" : "验证OTP请求。",
+        "description" : "验证OTP请求。",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "required" : [ "otp", "sessionId" ],
+                "type" : "object",
+                "properties" : {
+                  "sessionId" : {
+                    "type" : "string",
+                    "description" : "会话ID"
+                  },
+                  "otp" : {
+                    "type" : "string",
+                    "description" : "OTP验证码"
+                  }
+                },
+                "description" : "验证OTP请求对象"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "验证OTP的结果",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "valid" : {
+                      "type" : "boolean",
+                      "description" : "验证是否有效"
+                    },
+                    "remainingAttempts" : {
+                      "type" : "integer",
+                      "description" : "剩余尝试次数"
+                    }
+                  },
+                  "description" : "验证OTP的结果"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "com.webauthn4j.data.PublicKeyCredentialRpEntity" : {
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "type" : "string",
+            "description" : ""
+          },
+          "id" : {
+            "type" : "string",
+            "description" : ""
+          }
+        },
+        "description" : ""
+      },
+      "com.webauthn4j.data.PublicKeyCredentialUserEntity" : {
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "type" : "string",
+            "description" : ""
+          },
+          "id" : {
+            "type" : "array",
+            "description" : "",
+            "items" : {
+              "type" : "integer"
+            }
+          },
+          "displayName" : {
+            "type" : "string",
+            "description" : ""
+          }
+        },
+        "description" : ""
+      },
+      "com.webauthn4j.data.client.challenge.Challenge" : {
+        "type" : "object",
+        "properties" : { },
+        "description" : ""
+      },
+      "com.webauthn4j.data.PublicKeyCredentialType" : {
+        "type" : "object",
+        "properties" : {
+          "value" : {
+            "type" : "string",
+            "description" : ""
+          }
+        },
+        "description" : ""
+      },
+      "com.webauthn4j.data.attestation.statement.COSEAlgorithmIdentifier" : {
+        "type" : "object",
+        "properties" : {
+          "value" : {
+            "type" : "integer",
+            "description" : "",
+            "format" : "int64"
+          }
+        },
+        "description" : "com.webauthn4j.data.attestation.statement.COSEAlgorithmIdentifier"
+      },
+      "com.webauthn4j.data.PublicKeyCredentialParameters" : {
+        "type" : "object",
+        "properties" : {
+          "type" : {
+            "type" : "object",
+            "properties" : {
+              "value" : {
+                "type" : "string",
+                "description" : ""
+              }
+            },
+            "description" : ""
+          },
+          "alg" : {
+            "type" : "object",
+            "properties" : {
+              "value" : {
+                "type" : "integer",
+                "description" : "",
+                "format" : "int64"
+              }
+            },
+            "description" : ""
+          }
+        },
+        "description" : "com.webauthn4j.data.PublicKeyCredentialParameters"
+      },
+      "com.webauthn4j.data.AuthenticatorTransport" : {
+        "type" : "object",
+        "properties" : {
+          "value" : {
+            "type" : "string",
+            "description" : ""
+          }
+        },
+        "description" : "com.webauthn4j.data.AuthenticatorTransport"
+      },
+      "com.webauthn4j.data.PublicKeyCredentialDescriptor" : {
+        "type" : "object",
+        "properties" : {
+          "type" : {
+            "type" : "object",
+            "properties" : {
+              "value" : {
+                "type" : "string",
+                "description" : ""
+              }
+            },
+            "description" : ""
+          },
+          "id" : {
+            "type" : "array",
+            "description" : "",
+            "items" : {
+              "type" : "integer"
+            }
+          },
+          "transports" : {
+            "type" : "array",
+            "description" : "",
+            "items" : {
+              "type" : "object",
+              "properties" : {
+                "value" : {
+                  "type" : "string",
+                  "description" : ""
+                }
+              },
+              "description" : "com.webauthn4j.data.AuthenticatorTransport"
+            }
+          }
+        },
+        "description" : "com.webauthn4j.data.PublicKeyCredentialDescriptor"
+      },
+      "com.webauthn4j.data.AuthenticatorAttachment" : {
+        "type" : "object",
+        "properties" : {
+          "value" : {
+            "type" : "string",
+            "description" : ""
+          }
+        },
+        "description" : ""
+      },
+      "com.webauthn4j.data.ResidentKeyRequirement" : {
+        "type" : "object",
+        "properties" : {
+          "value" : {
+            "type" : "string",
+            "description" : ""
+          }
+        },
+        "description" : ""
+      },
+      "com.webauthn4j.data.UserVerificationRequirement" : {
+        "type" : "object",
+        "properties" : {
+          "value" : {
+            "type" : "string",
+            "description" : ""
+          }
+        },
+        "description" : ""
+      },
+      "com.webauthn4j.data.AuthenticatorSelectionCriteria" : {
+        "type" : "object",
+        "properties" : {
+          "authenticatorAttachment" : {
+            "type" : "object",
+            "properties" : {
+              "value" : {
+                "type" : "string",
+                "description" : ""
+              }
+            },
+            "description" : ""
+          },
+          "requireResidentKey" : {
+            "type" : "boolean",
+            "description" : ""
+          },
+          "residentKey" : {
+            "type" : "object",
+            "properties" : {
+              "value" : {
+                "type" : "string",
+                "description" : ""
+              }
+            },
+            "description" : ""
+          },
+          "userVerification" : {
+            "type" : "object",
+            "properties" : {
+              "value" : {
+                "type" : "string",
+                "description" : ""
+              }
+            },
+            "description" : ""
+          }
+        },
+        "description" : ""
+      },
+      "com.webauthn4j.data.AttestationConveyancePreference" : {
+        "type" : "object",
+        "properties" : {
+          "value" : {
+            "type" : "string",
+            "description" : ""
+          }
+        },
+        "description" : ""
+      },
+      "com.webauthn4j.data.extension.HMACGetSecretInput" : {
+        "type" : "object",
+        "properties" : {
+          "salt1" : {
+            "type" : "array",
+            "description" : "",
+            "items" : {
+              "type" : "integer"
+            }
+          },
+          "salt2" : {
+            "type" : "array",
+            "description" : "",
+            "items" : {
+              "type" : "integer"
+            }
+          }
+        },
+        "description" : ""
+      },
+      "响应类" : {
+        "type" : "object",
+        "properties" : {
+          "attestationObject" : {
+            "type" : "string",
+            "description" : ""
+          },
+          "clientDataJSON" : {
+            "type" : "string",
+            "description" : ""
+          }
+        },
+        "description" : ""
+      },
+      "响应类，包含身份验证响应的详细信息。" : {
+        "type" : "object",
+        "properties" : {
+          "authenticatorData" : {
+            "type" : "string",
+            "description" : "认证器数据。"
+          },
+          "clientDataJSON" : {
+            "type" : "string",
+            "description" : "客户端数据JSON。"
+          },
+          "signature" : {
+            "type" : "string",
+            "description" : "签名数据。"
+          },
+          "userHandle" : {
+            "type" : "string",
+            "description" : "用户句柄。"
+          }
+        },
+        "description" : "响应对象，包含身份验证结果。"
+      },
+      "java.util.UUID" : {
+        "type" : "object",
+        "properties" : {
+          "mostSigBits" : {
+            "type" : "integer",
+            "description" : "",
+            "format" : "int64"
+          },
+          "leastSigBits" : {
+            "type" : "integer",
+            "description" : "",
+            "format" : "int64"
+          },
+          "leastSignificantBits" : {
+            "type" : "integer",
+            "description" : "Returns the least significant 64 bits of this UUID's 128 bit value.",
+            "format" : "int64"
+          },
+          "mostSignificantBits" : {
+            "type" : "integer",
+            "description" : "Returns the most significant 64 bits of this UUID's 128 bit value.",
+            "format" : "int64"
+          }
+        },
+        "description" : ""
+      },
+      "com.webauthn4j.data.attestation.authenticator.AAGUID" : {
+        "type" : "object",
+        "properties" : {
+          "value" : {
+            "type" : "object",
+            "properties" : {
+              "mostSigBits" : {
+                "type" : "integer",
+                "description" : "",
+                "format" : "int64"
+              },
+              "leastSigBits" : {
+                "type" : "integer",
+                "description" : "",
+                "format" : "int64"
+              },
+              "leastSignificantBits" : {
+                "type" : "integer",
+                "description" : "Returns the least significant 64 bits of this UUID's 128 bit value.",
+                "format" : "int64"
+              },
+              "mostSignificantBits" : {
+                "type" : "integer",
+                "description" : "Returns the most significant 64 bits of this UUID's 128 bit value.",
+                "format" : "int64"
+              }
+            },
+            "description" : ""
+          },
+          "bytes" : {
+            "type" : "array",
+            "items" : {
+              "type" : "integer"
+            }
+          }
+        },
+        "description" : "~ Instance fields ================================================================================================"
+      },
+      "com.webauthn4j.data.attestation.authenticator.COSEKey" : {
+        "type" : "object",
+        "properties" : {
+          "keyType" : {
+            "type" : "string",
+            "description" : "{OKP=OKP, EC2=EC2, RSA=RSA, SYMMETRIC=SYMMETRIC, RESERVED=RESERVED}",
+            "enum" : [ "OKP", "EC2", "RSA", "SYMMETRIC", "RESERVED" ]
+          },
+          "keyId" : {
+            "type" : "array",
+            "items" : {
+              "type" : "integer"
+            }
+          },
+          "algorithm" : {
+            "type" : "object",
+            "properties" : {
+              "value" : {
+                "type" : "integer",
+                "description" : "",
+                "format" : "int64"
+              }
+            },
+            "description" : "com.webauthn4j.data.attestation.statement.COSEAlgorithmIdentifier"
+          },
+          "keyOps" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string",
+              "description" : "{SIGN=SIGN, VERIFY=VERIFY, ENCRYPT=ENCRYPT, DECRYPT=DECRYPT, WRAP_KEY=WRAP_KEY, UNWRAP_KEY=UNWRAP_KEY, DERIVE_KEY=DERIVE_KEY, DERIVE_BITS=DERIVE_BITS, MAC_CREATE=MAC_CREATE, MAC_VERIFY=MAC_VERIFY}",
+              "enum" : [ "SIGN", "VERIFY", "ENCRYPT", "DECRYPT", "WRAP_KEY", "UNWRAP_KEY", "DERIVE_KEY", "DERIVE_BITS", "MAC_CREATE", "MAC_VERIFY" ]
+            }
+          },
+          "baseIV" : {
+            "type" : "array",
+            "items" : {
+              "type" : "integer"
+            }
+          }
+        },
+        "description" : "com.webauthn4j.data.attestation.authenticator.COSEKey"
+      },
+      "com.webauthn4j.data.attestation.authenticator.AttestedCredentialData" : {
+        "type" : "object",
+        "properties" : {
+          "aaguid" : {
+            "type" : "object",
+            "properties" : {
+              "value" : {
+                "type" : "object",
+                "properties" : {
+                  "mostSigBits" : {
+                    "type" : "integer",
+                    "description" : "",
+                    "format" : "int64"
+                  },
+                  "leastSigBits" : {
+                    "type" : "integer",
+                    "description" : "",
+                    "format" : "int64"
+                  },
+                  "leastSignificantBits" : {
+                    "type" : "integer",
+                    "description" : "Returns the least significant 64 bits of this UUID's 128 bit value.",
+                    "format" : "int64"
+                  },
+                  "mostSignificantBits" : {
+                    "type" : "integer",
+                    "description" : "Returns the most significant 64 bits of this UUID's 128 bit value.",
+                    "format" : "int64"
+                  }
+                },
+                "description" : ""
+              },
+              "bytes" : {
+                "type" : "array",
+                "items" : {
+                  "type" : "integer"
+                }
+              }
+            },
+            "description" : "~ Instance fields ================================================================================================"
+          },
+          "credentialId" : {
+            "type" : "array",
+            "description" : "",
+            "items" : {
+              "type" : "integer"
+            }
+          },
+          "coseKey" : {
+            "type" : "object",
+            "properties" : {
+              "keyType" : {
+                "type" : "string",
+                "description" : "{OKP=OKP, EC2=EC2, RSA=RSA, SYMMETRIC=SYMMETRIC, RESERVED=RESERVED}",
+                "enum" : [ "OKP", "EC2", "RSA", "SYMMETRIC", "RESERVED" ]
+              },
+              "keyId" : {
+                "type" : "array",
+                "items" : {
+                  "type" : "integer"
+                }
+              },
+              "algorithm" : {
+                "type" : "object",
+                "properties" : {
+                  "value" : {
+                    "type" : "integer",
+                    "description" : "",
+                    "format" : "int64"
+                  }
+                },
+                "description" : "com.webauthn4j.data.attestation.statement.COSEAlgorithmIdentifier"
+              },
+              "keyOps" : {
+                "type" : "array",
+                "items" : {
+                  "type" : "string",
+                  "description" : "{SIGN=SIGN, VERIFY=VERIFY, ENCRYPT=ENCRYPT, DECRYPT=DECRYPT, WRAP_KEY=WRAP_KEY, UNWRAP_KEY=UNWRAP_KEY, DERIVE_KEY=DERIVE_KEY, DERIVE_BITS=DERIVE_BITS, MAC_CREATE=MAC_CREATE, MAC_VERIFY=MAC_VERIFY}",
+                  "enum" : [ "SIGN", "VERIFY", "ENCRYPT", "DECRYPT", "WRAP_KEY", "UNWRAP_KEY", "DERIVE_KEY", "DERIVE_BITS", "MAC_CREATE", "MAC_VERIFY" ]
+                }
+              },
+              "baseIV" : {
+                "type" : "array",
+                "items" : {
+                  "type" : "integer"
+                }
+              }
+            },
+            "description" : ""
+          },
+          "cOSEKey" : {
+            "type" : "object",
+            "properties" : {
+              "keyType" : {
+                "type" : "string",
+                "description" : "{OKP=OKP, EC2=EC2, RSA=RSA, SYMMETRIC=SYMMETRIC, RESERVED=RESERVED}",
+                "enum" : [ "OKP", "EC2", "RSA", "SYMMETRIC", "RESERVED" ]
+              },
+              "keyId" : {
+                "type" : "array",
+                "items" : {
+                  "type" : "integer"
+                }
+              },
+              "algorithm" : {
+                "type" : "object",
+                "properties" : {
+                  "value" : {
+                    "type" : "integer",
+                    "description" : "",
+                    "format" : "int64"
+                  }
+                },
+                "description" : "com.webauthn4j.data.attestation.statement.COSEAlgorithmIdentifier"
+              },
+              "keyOps" : {
+                "type" : "array",
+                "items" : {
+                  "type" : "string",
+                  "description" : "{SIGN=SIGN, VERIFY=VERIFY, ENCRYPT=ENCRYPT, DECRYPT=DECRYPT, WRAP_KEY=WRAP_KEY, UNWRAP_KEY=UNWRAP_KEY, DERIVE_KEY=DERIVE_KEY, DERIVE_BITS=DERIVE_BITS, MAC_CREATE=MAC_CREATE, MAC_VERIFY=MAC_VERIFY}",
+                  "enum" : [ "SIGN", "VERIFY", "ENCRYPT", "DECRYPT", "WRAP_KEY", "UNWRAP_KEY", "DERIVE_KEY", "DERIVE_BITS", "MAC_CREATE", "MAC_VERIFY" ]
+                }
+              },
+              "baseIV" : {
+                "type" : "array",
+                "items" : {
+                  "type" : "integer"
+                }
+              }
+            },
+            "description" : "com.webauthn4j.data.attestation.authenticator.COSEKey"
+          }
+        },
+        "description" : ""
+      },
+      "java.lang.Object" : {
+        "type" : "object",
+        "properties" : { },
+        "description" : "java.lang.Object"
+      }
+    }
+  }
+}

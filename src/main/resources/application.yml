@@ -1,0 +1,76 @@
+server:
+  port: 9090
+  servlet:
+    session:
+      cookie:
+        same-site: lax
+
+spring:
+  config:
+    import: application-secret.yml
+  mail:
+    host: smtp.qq.com
+    port: 465
+    protocol: smtp
+    username: "${mail.username}"
+    password: "${mail.password}"
+    properties.mail.smtp:
+      auth: true
+      starttls.enable: true
+
+  datasource:
+    url: jdbc:mysql://localhost:3311/authority_db
+    driverClassName: com.mysql.cj.jdbc.Driver
+    username: "${datasource.username}"
+    password: "${datasource.password}"
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: none
+
+otp:
+  attempts: 5
+  resendAllowedAfterMinutes: 1
+  settings:
+    #dummy OTP 短信 sender
+    - id: "sms"
+      name: "Dummy SMS OTP Setting"
+      messageTitle: "验证码"
+      messageTemplate: "Confirmation code: ${otp}"
+      otpLength: 5
+      useLetters: false
+      useDigits: true
+      ttlMinutes: 3
+      sender: "DummyOTPSender"
+
+    #Twilio OTP SMS测试 Sender
+    - id: "twilioSms"
+      name: "Twilio SMS OTP Setting"
+      messageTitle: "验证码"
+      messageTemplate: "Confirmation code: ${otp}"
+      otpLength: 5
+      useLetters: false
+      useDigits: true
+      ttlMinutes: 3
+      sender: "TwilioOTPSender"
+
+    #Email OTP 邮箱 Sender
+    - id: "email"
+      name: "TEST Email"
+      messageTitle: "验证码确认"
+      messageTemplate: "otp-email-template.html: ${otp}"
+      otpLength: 5
+      useLetters: false
+      useDigits: true
+      ttlMinutes: 3
+      sender: "EmailOTPSender"
+
+webauthn:
+  settings:
+    timeout: 60000
+    rpId: localhost
+    origin: 'http://localhost:3000'
+
+totp:
+  issuer: "wsscg"
+  issuerLabel: "WSSCG OBJECT"
