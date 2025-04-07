@@ -9,8 +9,8 @@ import com.authority.otp.exception.FrequentSendingForbidden;
 import com.authority.otp.services.OtpService;
 import com.authority.otp.exception.OtpVerifyAttemptsExceeded;
 import com.authority.otp.exception.SendOtpException;
-import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,7 +36,7 @@ public class OtpRestController {
      * @throws FrequentSendingForbidden 如果发送OTP过于频繁，则抛出此异常
      */
     @PostMapping("/send")
-    public SendOtpResponse send(@RequestBody @Valid SendOtpRequest sendOTPRequest)
+    public SendOtpResponse send(@RequestBody @Validated SendOtpRequest sendOTPRequest)
             throws NotFoundException, SendOtpException, FrequentSendingForbidden {
         return otpService.send(sendOTPRequest.getSender(), sendOTPRequest.getDestination());
     }
@@ -50,7 +50,7 @@ public class OtpRestController {
      * @throws OtpVerifyAttemptsExceeded 如果验证尝试次数超过限制，则抛出此异常
      */
     @PostMapping("/verify")
-    public VerifyOtpResponse verify(@RequestBody @Valid VerifyOtpRequest verifyOTPRequest)
+    public VerifyOtpResponse verify(@RequestBody @Validated VerifyOtpRequest verifyOTPRequest)
             throws NotFoundException, OtpVerifyAttemptsExceeded {
         return otpService.verify(verifyOTPRequest.getSessionId(), verifyOTPRequest.getOtp());
     }

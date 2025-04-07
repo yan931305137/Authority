@@ -32,27 +32,27 @@ otp:
   attempts: 5
   resendAllowedAfterMinutes: 1
   settings:
-    #dummy OTP 短信 sender
+    #本地测试 OTP 短信 sender
     - id: "sms"
       name: "Dummy SMS OTP Setting"
       messageTitle: "验证码"
-      messageTemplate: "Confirmation code: ${otp}"
+      messageTemplate: "验证码: ${otp}"
       otpLength: 5
       useLetters: false
       useDigits: true
       ttlMinutes: 3
       sender: "DummyOTPSender"
 
-    #Twilio OTP SMS测试 Sender
-    - id: "twilioSms"
-      name: "Twilio SMS OTP Setting"
+    #Aliyun OTP 短信 Sender
+    - id: "AliyunSms"
+      name: "Aliyun SMS OTP Setting"
       messageTitle: "验证码"
-      messageTemplate: "Confirmation code: ${otp}"
+      messageTemplate: "验证码: ${otp}"
       otpLength: 5
       useLetters: false
       useDigits: true
       ttlMinutes: 3
-      sender: "TwilioOTPSender"
+      sender: "AliyunOTPSender"
 
     #Email OTP 邮箱 Sender
     - id: "email"
@@ -64,6 +64,13 @@ otp:
       useDigits: true
       ttlMinutes: 3
       sender: "EmailOTPSender"
+
+Aliyun:
+  uri: "dysmsapi.aliyuncs.com"
+  templateCode: "SMS_316350157"
+  region: "region"
+  accessKeyId: ${Aliyun.access.KeyId}
+  accessKeySecret: ${Aliyun.access.KeySecret}
 
 webauthn:
   settings:

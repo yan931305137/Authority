@@ -1,6 +1,7 @@
 package com.authority.otp.services;
 
 import com.authority.otp.exception.*;
+import com.authority.otp.utils.EmailGenerator;
 import com.authority.otp.utils.OtpGenerator;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -16,10 +17,6 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
-import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.*;
 
 /**
@@ -33,6 +30,7 @@ public class OtpService {
     private final OtpConfiguration otpConfiguration;
     private final SentOtpRepository sentOtpRepository;
     private final OtpGenerator otpGenerator;
+    private final EmailGenerator emailGenerator;
     private final ApplicationContext applicationContext;
 
     /**
@@ -65,30 +63,14 @@ public class OtpService {
             log.warn("OTP发送器 {} 未找到", otpSettings.getSender());
             throw new SenderNotFoundException();
         }
-        final String messageTitle = otpSettings.getMessageTitle();
 
+        String fileContent = otpSettings.getMessageTemplate();
+        final String messageTitle = otpSettings.getMessageTitle();
         validateFrequentSending(destination);
 
-        String messageTemplate = otpSettings.getMessageTemplate();
-        int colonIndex = messageTemplate.indexOf(':');
-        String filePath = messageTemplate.substring(0, colonIndex).trim();
-
-        StringBuilder content = new StringBuilder();
-        try (InputStream inputStream = OtpService.class.getResourceAsStream("/templates/" + filePath);
-             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                content.append(line).append("\n");
-            }
-        } catch (FileNotFoundException e) {
-            log.error("读取OTP电子邮件模板文件时未找到文件", e);
-            throw new FrequentSendingForbidden();
-        } catch (IOException e) {
-            log.error("读取OTP电子邮件模板文件时出错", e);
-            throw new FrequentSendingForbidden();
+        if(type.equals("email")){
+            fileContent = emailGenerator.EmailFilter(otpSettings);
         }
-
-        String fileContent = content.toString();
 
         final String messageBody = createMessage(fileContent, sentOTP.getOtp());
 
