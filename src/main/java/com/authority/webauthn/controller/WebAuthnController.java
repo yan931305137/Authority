@@ -125,7 +125,7 @@ public class WebAuthnController {
      * @param request HttpServletRequest对象
      * @return Map对象
      */
-    @PostMapping("/login/credential")
+    @PostMapping("/login/credential/")
     public Map<String, Object> assertCredential(@RequestBody AssertRequest assertRequest, HttpServletRequest request) {
 
         log.info("assert request: {}", assertRequest);

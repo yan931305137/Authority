@@ -113,6 +113,8 @@ public class WebAuthnLoginService {
                 Objects.deepEquals(cr.getAttestedCredentialData().getCredentialId(), id))
                 .findFirst().orElse(null);
 
+        System.out.println(credentialRecords);
+
         AuthenticationParameters authenticationParameters =
                 new AuthenticationParameters(
                         serverProperty,
@@ -135,13 +137,7 @@ public class WebAuthnLoginService {
             // 如果您想处理WebAuthn数据验证错误，请捕获ValidationException
             throw e;
         }
-// 请更新认证器记录的计数 TODO
-//        updateCounter(
-//                authenticationData.getCredentialId(),
-//                authenticationData.getAuthenticatorData().getSignCount()
-//        );
 
         return authenticationData.getAuthenticatorData();
-
     }
 }

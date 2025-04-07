@@ -1,5 +1,6 @@
 package com.authority.totp.services;
 
+import com.authority.totp.dto.GeneratekeyDto;
 import com.authority.totp.exception.UserNotFoundException;
 import com.eatthepath.otp.TimeBasedOneTimePasswordGenerator;
 import lombok.AllArgsConstructor;
@@ -21,6 +22,7 @@ import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 import java.text.MessageFormat;
 import java.time.Instant;
+import java.util.Date;
 import java.util.Optional;
 
 /**
@@ -37,7 +39,7 @@ public class TotpService {
 
     private TotpConfiguration totpConfiguration;
 
-    private static final String URI_TEMPLATE = "otpauth://totp/{0}:{1}@{2}?secret={3}&issuer={0}";
+    private static final String URI_TEMPLATE = "otpauth://totp/{0}:{1}@{2}?secret={3}&issuer={0}&timestamp={4}";
 
     /**
      * 注册TOTP，生成并保存密钥，返回TOTP URI。
@@ -53,14 +55,15 @@ public class TotpService {
             registeredTotp = new RegisteredTotp();
             registeredTotp.setUsername(username);
         }
-        final String secret = generateKey();
-        registeredTotp.setSecret(secret);
+        final GeneratekeyDto generatekey = generateKey();
+
+        registeredTotp.setSecret(generatekey.getKey());
         totpRepository.save(registeredTotp);
         final String issuerLabelEncoded = URLEncoder.encode(totpConfiguration.getIssuerLabel(), StandardCharsets.UTF_8);
         final String usernameEncoded = URLEncoder.encode(username, StandardCharsets.UTF_8);
         final String issuerEncoded = URLEncoder.encode(totpConfiguration.getIssuer(), StandardCharsets.UTF_8);
 
-        final String uriStr = MessageFormat.format(URI_TEMPLATE, issuerLabelEncoded, usernameEncoded, issuerEncoded, secret);
+        final String uriStr = MessageFormat.format(URI_TEMPLATE, issuerLabelEncoded, usernameEncoded, issuerEncoded, generatekey.getKey(),generatekey.getTimestamp());
         return URI.create(uriStr);
     }
 
@@ -68,7 +71,7 @@ public class TotpService {
      * 生成密钥。
      * @return 密钥字符串
      */
-    public String generateKey() {
+    public GeneratekeyDto generateKey() {
         final Key key;
         try {
             final KeyGenerator keyGenerator = KeyGenerator.getInstance(generator.getAlgorithm());
@@ -76,7 +79,10 @@ public class TotpService {
             keyGenerator.init(macLengthInBytes * 8);
 
             key = keyGenerator.generateKey();
-            return new Base32().encodeToString(key.getEncoded());
+            return GeneratekeyDto.builder()
+                    .key(new Base32().encodeToString(key.getEncoded()))
+                    .timestamp(String.valueOf(Instant.now().toEpochMilli()))
+                    .build();
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
